@@ -2,7 +2,8 @@ import time
 
 
 class Task(object):
-    def __init__(self, client):
+    def __init__(self, client, thread):
+        self.thread = thread
         self.client = client
         print("task created")
 
@@ -17,6 +18,7 @@ class LongTask(Task):
         time.sleep(10)
         self.client.send(str.encode('HELLO WORLD DARI TASK 1'))
         self.client.close()
+        self.thread.stop()
 
 
 class MediumTask(Task):
@@ -26,6 +28,7 @@ class MediumTask(Task):
         time.sleep(3)
         self.client.send(str.encode('HELLO WORLD DARI TASK 2'))
         self.client.close()
+        self.thread.stop()
 
 
 class ShortTask(Task):
@@ -35,3 +38,4 @@ class ShortTask(Task):
         time.sleep(1)
         self.client.send(str.encode('HELLO WORLD DARI TASK 3'))
         self.client.close()
+        self.thread.stop()
