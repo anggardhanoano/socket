@@ -8,10 +8,18 @@ s = socket.socket()
 port = 8000
 
 # connect to the server on local computer
-s.connect(('', port))
-s.send(str.encode(sys.argv[1]))
+s.connect(('127.0.0.1', port))
+var =sys.argv
+if len(var)== 3: 
+     s.send(str.encode(sys.argv[1] + " " + sys.argv[2]))
+elif len(var)== 5: 
+     s.send(str.encode(sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4]))
+else:
+     s.send(str.encode(sys.argv[1]))
 print(s.recv(4096).decode())
 # receive data from the server
+print(s.recv(4096).decode())
+print(s.recv(4096).decode())
 print(s.recv(4096).decode())
 print(s.recv(4096).decode())
 # close the connection
