@@ -13,7 +13,7 @@ print("Socket successfully created")
 
 port = 8000
 
-s.bind(('', port))
+s.bind(('127.0.0.1', port))
 print("socket binded to " + str(port))
 
 
