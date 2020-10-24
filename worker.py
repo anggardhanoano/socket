@@ -30,7 +30,9 @@ def server():
         print("socket is listening")
         (conn, (ip, port)) = s.accept()
         print("Got connection from" + str(ip))
-        task_type = int(conn.recv(1024))
+        var = conn.recv(1024).split()
+        extra =var[1:]
+        task_type = int(var[0])
 
         if task_type == 4:
             conn.send(str.encode('Task in queue ' + str(taks_queue.qsize())))
@@ -40,7 +42,7 @@ def server():
                                  str(len([thread for thread in clients if not thread.stopped()]))))
             conn.close()
         else:
-            newthread = ClientThread(conn, ip, port, taks_queue, task_type)
+            newthread = ClientThread(conn, ip, port, taks_queue, task_type, extra)
             newthread.start()
             clients.append(newthread)
 

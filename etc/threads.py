@@ -27,13 +27,14 @@ class TaskThread(Thread):
 
 
 class ClientThread(Thread):
-    def __init__(self, conn, ip, port, queue, task_type):
+    def __init__(self, conn, ip, port, queue, task_type, args):
         Thread.__init__(self)
         self.conn = conn
         self.ip = ip
         self.port = port
         self.queue = queue
         self.task_type = task_type
+        self.args = args
         self._stop_event = Event()
         print("[+] New server socket thread started for " + ip +
               ":" + str(port) + " - " + "Task type : " + str(self.task_type))
@@ -58,11 +59,11 @@ class ClientThread(Thread):
             if not self.queue.full() and not task_created:
                 task_created = True
                 if self.task_type == 1:
-                    self.queue.put(LongTask(self.conn, self))
+                    self.queue.put(LongTask(self.conn, self, self.args))
                 elif self.task_type == 2:
-                    self.queue.put(MediumTask(self.conn, self))
+                    self.queue.put(MediumTask(self.conn, self, self.args))
                 else:
-                    self.queue.put(ShortTask(self.conn, self))
+                    self.queue.put(ShortTask(self.conn, self, self.args))
 
             if self.stopped():
                 return
