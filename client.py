@@ -9,6 +9,7 @@ port = 8000
 
 # connect to the server on local computer
 s.connect(('127.0.0.1', port))
+sys.setrecursionlimit(999999999)
 var =sys.argv
 if len(var)== 3: 
      s.send(str.encode(sys.argv[1] + " " + sys.argv[2]))
