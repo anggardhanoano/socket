@@ -27,7 +27,7 @@ while(True):
         threading.Thread(target=main_c, args=(x, counter3)).start()
         counter3 += 1
     elif(x[0] == "4" and len(x) > 1):
-        threading.Thread(target=main_c, args=(x, counter3)).start()
+        threading.Thread(target=main_c, args=(x, counter4)).start()
         counter4 += 1
     elif(x == "5"):
         threading.Thread(target=main_c2, args=(x,)).start()
