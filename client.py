@@ -3,8 +3,8 @@ import socket
 import sys
 # Create a socket object
 
-worker_address = ['127.0.0.1', '3.84.192.40']
-ports = [8000, 8000]
+worker_address = ['18.207.226.80', '3.84.192.40', '52.207.212.113']
+ports = [8000, 8000, 8000]
 
 
 def main_c(x, c):
@@ -35,7 +35,7 @@ def main_c(x, c):
     # Define the port on which you want to connect
     try:
         address = worker_address[min_task]
-        port = port[min_task]
+        port = ports[min_task]
         s = socket.socket()
         # connect to the server on local computer
         s.connect((address, port))
@@ -54,7 +54,7 @@ def main_c(x, c):
         # close the connection
         # close the connection
         s.close()
-    except:
+    except Exception as e:
         print("all worker is unavailable :(")
     return 1
 
