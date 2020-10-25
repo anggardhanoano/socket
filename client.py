@@ -11,6 +11,7 @@ def main_c(x, c):
     s = socket.socket()
 
     min_task = 1000000
+    index_add = 0
 
     for i in range(len(worker_address)):
         add = worker_address[i]
@@ -20,22 +21,23 @@ def main_c(x, c):
         try:
             s.connect((add, po))
             s.send(str.encode("5"))
+
             queue = s.recv(4096).decode().split(" ")[-1]
             if(queue == "queue"):
                 queue = "0"
             # arr.append(int(queue))
             if int(queue) < min_task:
-                min_task = i
+                min_task = int(queue)
+                index_add = i
         except:
             print("there is a problem connect to {}".format(add))
 
     s.close()
 
-    # index_min = arr.index(min(arr))
     # Define the port on which you want to connect
     try:
-        address = worker_address[min_task]
-        port = ports[min_task]
+        address = worker_address[index_add]
+        port = ports[index_add]
         s = socket.socket()
         # connect to the server on local computer
         s.connect((address, port))
