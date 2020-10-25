@@ -45,7 +45,7 @@ def server():
             clients.append(newthread)
 
 
-if __name__ == "__main__":
+def main():
     worker()
     server()
     for t in threads:
@@ -53,3 +53,7 @@ if __name__ == "__main__":
 
     for t in clients:
         t.join()
+
+
+if __name__ == "__main__":
+    main()

@@ -20,7 +20,7 @@ class TaskThread(Thread):
                 job = self.queue.get()
                 logging.debug("Queueing task")
                 job.work()
-                # job.terminate()
+
                 logging.debug("Finshed queue")
                 if self.queue.empty():
                     print("Queue already empty")
