@@ -18,9 +18,13 @@ def main_c(x, c):
         s = socket.socket()
         s.connect((add, po))
         s.send(str.encode("4"))
+<<<<<<< HEAD
         queue = s.recv(4096).decode().split(" ")
         print(queue)
         arr.append(int(queue))
+=======
+        arr.append(int(s.recv(4096).decode().split(" ")[-1]))
+>>>>>>> parent of 4a52f3d... test
 
     index_min = arr.index(min(arr))
 
@@ -72,3 +76,8 @@ def main_c2(x):
     # close the connection
     s.close()
     return 1
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> parent of 4a52f3d... test
