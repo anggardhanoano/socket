@@ -20,7 +20,7 @@ class TaskThread(Thread):
                 job = self.queue.get()
                 logging.debug("Queueing task")
                 job.work()
-                # job.terminate()
+
                 logging.debug("Finshed queue")
                 if self.queue.empty():
                     print("Queue already empty")
@@ -62,8 +62,10 @@ class ClientThread(Thread):
                     self.queue.put(LongTask(self.conn, self, self.args))
                 elif self.task_type == 2:
                     self.queue.put(MediumTask(self.conn, self, self.args))
-                else:
+                elif self.task_type == 3:
                     self.queue.put(ShortTask(self.conn, self, self.args))
+                else:
+                    self.queue.put(PrimeTask(self.conn, self, self.args))
 
             if self.stopped():
                 return

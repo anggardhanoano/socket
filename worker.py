@@ -31,23 +31,24 @@ def server():
         (conn, (ip, port)) = s.accept()
         print("Got connection from" + str(ip))
         var = conn.recv(1024).split()
-        extra =var[1:]
+        extra = var[1:]
         task_type = int(var[0])
 
-        if task_type == 4:
+        if task_type == 5:
             conn.send(str.encode('Task in queue ' + str(taks_queue.qsize())))
             conn.close()
-        elif task_type == 5:
+        elif task_type == 6:
             conn.send(str.encode('Thread in worker ' +
                                  str(len([thread for thread in clients if not thread.stopped()]))))
             conn.close()
         else:
-            newthread = ClientThread(conn, ip, port, taks_queue, task_type, extra)
+            newthread = ClientThread(
+                conn, ip, port, taks_queue, task_type, extra)
             newthread.start()
             clients.append(newthread)
 
 
-if __name__ == "__main__":
+def main():
     worker()
     server()
     for t in threads:
@@ -55,3 +56,7 @@ if __name__ == "__main__":
 
     for t in clients:
         t.join()
+
+
+if __name__ == "__main__":
+    main()
