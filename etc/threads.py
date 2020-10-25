@@ -63,7 +63,7 @@ class ClientThread(Thread):
                 elif self.task_type == 2:
                     self.queue.put(MediumTask(self.conn, self, self.args))
                 elif self.task_type == 3:
-                    self.queue.put(ShortTask(self.conn, self, self.args))    
+                    self.queue.put(ShortTask(self.conn, self, self.args))
                 else:
                     self.queue.put(PrimeTask(self.conn, self, self.args))
 
