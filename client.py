@@ -7,24 +7,29 @@ import sys
 def main_c(x, c):
     s = socket.socket()
 
+    address = ['127.0.0.1']
+    port = [8000]
+    arr = []
+
+    for i in range(len(address)):
+        add = address[i]
+        po = port[i]
+
+        s = socket.socket()
+        s.connect((add, po))
+        s.send(str.encode("4"))
+        queue = s.recv(4096).decode().split(" ")
+        print(queue)
+        arr.append(int(queue))
+
+    index_min = arr.index(min(arr))
+
     # Define the port on which you want to connect
-    port = 8000
+    address = address[index_min]
+    port = port[index_min]
 
     # connect to the server on local computer
-    s.connect(('127.0.0.1', port))
-    # s.send(str.encode(sys.argv[1]))
-#     if x == "2":
-#         temp = []
-#         print("Enter a website link: ")
-#         i = input()
-#         s.send(str.encode(x + " " + i))
-#     elif x == "1":
-#         print("Enter Currency From, Currency To and Amount")
-#         print()
-#         i = input()
-#         i = i.split(" ")
-#         s.send(str.encode(x + " " + i[0] + " " + i[1] + " " + i[2]))
-#     else:
+    s.connect((address, port))
     s.send(str.encode(x))
     x = x[0] + "-" + str(c)
     print("{:>30}{:>30}".format(x, s.recv(4096).decode()))
