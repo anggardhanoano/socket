@@ -5,11 +5,28 @@ import sys
 def main_c(x, c):
     s = socket.socket()
 
+    address = ['127.0.0.1', '127.0.0.1', '127.0.0.1']
+    port = [8000, 8001, 8002]
+    arr = []
+
+    for i in range(len(address)):
+        add = address[i]
+        po = port[i]
+        
+        s = socket.socket()
+        s.connect((add, po))
+        s.send(str.encode("4"))
+        arr.append(int(s.recv(4096).decode().split(" ")[-1]))
+
+    index_min = arr.index(min(arr))
+
+
     # Define the port on which you want to connect
-    port = 8000
+    address = address[index_min]
+    port = port[index_min]
 
     # connect to the server on local computer
-    s.connect(('127.0.0.1', port))
+    s.connect((address, port))
     # s.send(str.encode(sys.argv[1]))
     if x == "2": 
         temp = []
@@ -49,7 +66,7 @@ def main_c2(x):
     # connect to the server on local computer
     s.connect(('127.0.0.1', port))
     # s.send(str.encode(sys.argv[1]))
-    s.send(str.encode(x))
+    s.send(str.encode(x))                         
     message = []
     print("{:>30}{:>30}".format(x, s.recv(4096).decode()))
     # receive data from the server
