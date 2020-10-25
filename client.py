@@ -33,7 +33,6 @@ def main_c(x, c):
             print("there is a problem connect to {}".format(add))
 
     s.close()
-
     # Define the port on which you want to connect
     try:
         address = worker_address[index_add]
