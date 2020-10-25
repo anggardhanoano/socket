@@ -2,7 +2,7 @@ from pyfiglet import Figlet
 import subprocess
 import sys
 import threading
-from client import main_c, main_c2
+from client import main_c, main_c3, main_c4
 
 result = Figlet(font='slant')
 print(result.renderText('Worker is Ready'))
@@ -30,8 +30,8 @@ while(True):
         threading.Thread(target=main_c, args=(x, counter4)).start()
         counter4 += 1
     elif(x == "5"):
-        threading.Thread(target=main_c2, args=(x,)).start()
+        threading.Thread(target=main_c3, args=(x,)).start()
     elif(x == "6"):
-        threading.Thread(target=main_c2, args=(x,)).start()
+        threading.Thread(target=main_c4, args=(x,)).start()
     else:
         print("Command is wrong!")
